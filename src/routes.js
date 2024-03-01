@@ -114,7 +114,7 @@ const routes = [
   {
     type: "collapse",
     name: "Myself",
-    key: "myself",
+    key: "self",
     icon: <MenuSelf />,
     iconActive: <MenuSelfActive />,
     noCollapse: true,
