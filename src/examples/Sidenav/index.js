@@ -345,8 +345,10 @@ function Sidenav({ color, brand, brandName, routes, avatar, ...rest }) {
             }}
             sx={{
               top: 0,
+
               "& .MuiPopover-paper": {
                 overflowY: "hidden",
+                padding: "0 !important",
               },
             }}
           >
