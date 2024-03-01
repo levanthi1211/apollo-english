@@ -1,0 +1,29 @@
+#login-bg .slick-slider,
+#login-bg .slick-list,
+#login-bg .slick-track,
+#login-bg .slick-slide div {
+  height: 100%;
+}
+#login-bg .slick-dots {
+  height: 16px;
+  bottom: 12.8%;
+  padding-left: 11.9%;
+  text-align: start;
+  z-index: 99;
+}
+#login-bg .slick-dots .custom-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: #f7f7f7;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+#login-bg .slick-dots .slick-active {
+  cursor: pointer;
+  width: 48px;
+}
+#login-bg .slick-dots .slick-active .custom-dot {
+  width: 48px;
+  background: white;
+}

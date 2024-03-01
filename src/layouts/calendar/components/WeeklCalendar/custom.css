@@ -1,0 +1,117 @@
+#weekly .fc-scrollgrid-sync-inner {
+  height: 95px !important;
+  padding: 8px 0px;
+}
+#weekly .fc-timegrid-slots colgroup col,
+#weekly .fc-timegrid-cols colgroup col,
+#weekly .fc-col-header colgroup col {
+  width: 52px !important;
+}
+#weekly .fc-timegrid-slots table {
+  border-right-style: solid;
+  border-bottom-style: solid;
+}
+#weekly .fc-col-header {
+  border-left-style: solid;
+  border-right-style: solid;
+}
+#weekly .fc-col-header .fc-timegrid-axis {
+  border-bottom: none;
+}
+#weekly .fc-col-header-cell {
+  border-bottom: 1px solid #8898aa !important;
+  border-right: 1px solid white !important;
+}
+#weekly .fc-col-header-cell.fc-day-mon {
+  border-left: 0.5px solid #e9ecef !important;
+  box-shadow: -2px 0px 2px -2px #00000026;
+}
+#weekly .fc-col-header-cell.fc-day-sun {
+  border-right: 0.5px solid #e9ecef !important;
+  box-shadow: 2px 0px 2px -2px #00000026;
+}
+#weekly .fc-timegrid-slot {
+  height: 120px !important;
+}
+#weekly .fc-timegrid-slot:last-child {
+  border-bottom: 0.5px solid #e9ecef !important;
+  border-right: 0.5px solid #e9ecef !important;
+}
+#weekly .fc-timegrid-slot-label {
+  border-top: 0 !important;
+}
+#weekly .fc-timegrid-slot-label .fc-timegrid-slot-label-frame {
+  height: 100%;
+}
+#weekly thead .fc-scroller {
+  overflow: hidden !important;
+}
+#weekly tbody .fc-scroller {
+  margin-right: 9px;
+  padding-bottom: 24px;
+}
+#weekly tbody .fc-scroller::-webkit-scrollbar {
+  width: 8px;
+}
+#weekly tbody .fc-scroller::-webkit-scrollbar-track {
+  margin-bottom: 24px;
+}
+#weekly tbody .fc-scroller::-webkit-scrollbar-thumb {
+  background: #8898aa;
+  border-radius: 4px;
+}
+#weekly .fc-day-today {
+  background-color: inherit !important;
+}
+#weekly .fc-v-event {
+  margin: 16px;
+  border-radius: 8px;
+  border: none;
+  padding: 8px;
+}
+#weekly .fc-v-event .fc-event-time {
+  display: none;
+}
+#weekly .fc-v-event .fc-event-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #000;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.fc-scroller table {
+  border-right: 1px solid !important;
+  /* border-left: 1px solid white !important; */
+}
+
+#weekly .fc-timegrid-slots table {
+  border-right: 1px solid !important;
+  border-bottom: 1px solid white !important;
+}
+
+#weekly .fc-scrollgrid {
+  border: 0 !important;
+}
+
+#weekly .fc-scrollgrid-section td,
+#weekly .fc-scrollgrid-section th {
+  border-right: 0 !important;
+}
+
+#weekly .fc-scrollgrid-section th:not(.fc-timegrid-axis):not(.fc-day-sun) {
+  border-right: 1px solid white !important;
+}
+
+#weekly .fc-timegrid-slot {
+  border-top: 1px solid white !important;
+}
+
+#weekly .fc-scroller .fc-col-header {
+  border-left-style: hidden !important;
+}

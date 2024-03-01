@@ -1,0 +1,33 @@
+#header .slick-slider,
+#header .slick-list,
+#header .slick-track,
+#header .slick-slide div {
+  height: 100%;
+}
+
+#header .slick-dots {
+  height: 20px;
+  top: 211px !important;
+  z-index: 99;
+}
+
+@media screen and (max-width: 1200px) {
+  #header .slick-dots {
+    display: none;
+  }
+}
+
+#header .slick-dots .slick-active {
+  cursor: pointer;
+  .custom-dot {
+    background: white;
+  }
+}
+
+#header .slick-dots .custom-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8898aa;
+  cursor: pointer;
+}

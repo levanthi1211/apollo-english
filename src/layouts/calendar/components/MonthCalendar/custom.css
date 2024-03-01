@@ -1,0 +1,59 @@
+#right_side_calendar .fc-scrollgrid * {
+  border: none !important;
+}
+#right_side_calendar .fc-col-header-cell.fc-day {
+  width: 42px !important;
+  height: 38px !important;
+  line-height: 38px !important;
+}
+#right_side_calendar .fc-col-header-cell.fc-day {
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #525f7f;
+}
+#right_side_calendar .fc-daygrid-day-events {
+  display: none;
+}
+#right_side_calendar .fc-daygrid-day {
+  height: 42px !important;
+}
+#right_side_calendar .fc-day-other .fc-daygrid-day-top {
+  opacity: 1 !important;
+}
+#right_side_calendar .fc-daygrid-day-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px !important;
+  height: 42px !important;
+}
+#right_side_calendar .fc-daygrid-day-number {
+  font-family: Open Sans;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+  letter-spacing: 0em !important;
+  text-align: center !important;
+  color: #525f7f !important;
+}
+#right_side_calendar .fc-bg-event,
+#right_side_calendar .fc-day-today {
+  border-radius: 21px;
+}
+#right_side_calendar .fc-day-today {
+  background: #86cbff;
+}
+#right_side_calendar .fc-day-today .fc-daygrid-day-number {
+  font-weight: 700 !important;
+}
+#right_side_calendar .fc-bg-event {
+  background: #c0e4ff;
+}
+
+#right_side_calendar .fc-scrollgrid {
+  border: 0 !important;
+}
