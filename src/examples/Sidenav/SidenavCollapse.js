@@ -44,7 +44,7 @@ import { SvgIcon, Typography } from "@mui/material";
 function SidenavCollapse({ icon, iconActive, name, children, active, noCollapse, open, ...rest }) {
   const [controller] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
-  console.log(icon);
+
   return (
     <>
       <ListItem component="li">

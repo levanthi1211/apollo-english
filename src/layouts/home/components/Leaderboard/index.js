@@ -1,4 +1,4 @@
-import { Icon } from "@mui/material";
+import { Icon, Grid } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
@@ -28,11 +28,38 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
     }
   };
 
+  const renderChange = (value) => {
+    if (value === 0) return;
+    return (
+      <MDBox
+        sx={({ typography, breakpoints }) => ({
+          flexGrow: 0,
+          flexBasis: 0,
+          display: "flex",
+          alignItems: "center",
+          fontFamily: typography.openSan.fontFamily,
+          fontSize: 16,
+          fontWeight: 700,
+          lineHeight: "150%",
+          color: value > 0 ? "#2dce89" : "#F56565",
+
+          [breakpoints.down(375)]: {
+            fontSize: 12,
+          },
+        })}
+      >
+        {value > 0 && "+"}
+        {value} {value > 0 ? <IncreaseIcon /> : <DecreaseIcon />}
+      </MDBox>
+    );
+  };
+
   return (
     <MDBox
+      width="100%"
+      height="100%"
+      gap={2}
       sx={({ palette, functions: { pxToRem } }) => ({
-        width: pxToRem(450),
-        height: pxToRem(400),
         borderRadius: pxToRem(20),
         background: palette.white.main,
         boxShadow: "0px 2px 6px 0px rgba(0, 0, 0, 0.1)",
@@ -42,59 +69,69 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
         display: "flex",
       })}
     >
-      <MDBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <MDTypography
-          variant="h1"
-          sx={({ typography, functions: { pxToRem } }) => ({
-            fontFamily: typography.lexend.fontFamily,
-            fontSize: 20,
-            fontStyle: "normal",
-            fontWeight: 600,
-            lineHeight: "137%",
-            letterSpacing: pxToRem(-0.8),
-          })}
-        >
-          {header}
-        </MDTypography>
-        {tags ? (
-          <MDBox
-            sx={({ functions: { pxToRem } }) => ({
-              display: "flex",
-              gap: pxToRem(3),
-              marginRight: pxToRem(-15),
-            })}
-          >
-            {["ACADEMIC", "BUSSINES", "SERVICE"].map((tag, index) => (
-              <MDBox
-                key={index}
-                sx={({ typography, functions: { pxToRem } }) => ({
-                  borderRadius: pxToRem(6),
-                  background: "#b0eed3",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: `${pxToRem(4)} ${pxToRem(8)}`,
-                  color: "#1aae6f",
-                  textAlign: "center",
-                  fontFamily: typography.lexend.fontFamily,
-                  fontSize: 8,
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: pxToRem(12),
-                  textTransform: "uppercase",
+      <MDBox>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item>
+            <MDTypography
+              variant="h1"
+              sx={({ typography, breakpoints, functions: { pxToRem } }) => ({
+                fontFamily: typography.lexend.fontFamily,
+                fontSize: 20,
+                fontStyle: "normal",
+                fontWeight: 600,
+                lineHeight: "137%",
+                letterSpacing: pxToRem(-0.8),
 
-                  "&:not(:first-child)": {
-                    background: "#eaeaea",
-                  },
+                [breakpoints.down("xxl")]: {
+                  fontSize: 16,
+                },
+              })}
+            >
+              {header}
+            </MDTypography>
+          </Grid>
+          <Grid>
+            {tags ? (
+              <MDBox
+                sx={({ functions: { pxToRem } }) => ({
+                  display: "flex",
+                  gap: pxToRem(3),
+                  marginRight: pxToRem(-15),
                 })}
               >
-                {tag}
+                {["ACADEMIC", "BUSSINES", "SERVICE"].map((tag, index) => (
+                  <MDBox
+                    key={index}
+                    sx={({ typography, functions: { pxToRem } }) => ({
+                      borderRadius: pxToRem(6),
+                      background: "#b0eed3",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: `${pxToRem(4)} ${pxToRem(8)}`,
+                      color: "#1aae6f",
+                      textAlign: "center",
+                      fontFamily: typography.lexend.fontFamily,
+                      fontSize: 8,
+                      fontStyle: "normal",
+                      fontWeight: 700,
+                      lineHeight: pxToRem(12),
+                      textTransform: "uppercase",
+
+                      "&:not(:first-child)": {
+                        background: "#eaeaea",
+                      },
+                    })}
+                  >
+                    {tag}
+                  </MDBox>
+                ))}
               </MDBox>
-            ))}
-          </MDBox>
-        ) : (
-          <></>
-        )}
+            ) : (
+              <></>
+            )}
+          </Grid>
+        </Grid>
       </MDBox>
 
       <MDBox
@@ -111,7 +148,7 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
         <MDBox sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <MDTypography
             variant="p"
-            sx={({ palette, typography }) => ({
+            sx={({ palette, breakpoints, typography }) => ({
               color: palette.white.main,
               fontFamily: typography.openSan.fontFamily,
               fontSize: 14,
@@ -119,20 +156,27 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
               fontWeight: 700,
               lineHeight: "150%",
               opacity: 0.7,
+
+              [breakpoints.down(375)]: {
+                fontSize: 12,
+              },
             })}
           >
             {subtitle}
           </MDTypography>
           <MDTypography
             variant="p"
-            sx={({ palette, typography }) => ({
+            sx={({ palette, breakpoints, typography }) => ({
               color: palette.white.main,
               fontFamily: typography.openSan.fontFamily,
               fontSize: 14,
-              fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "137%",
               letterSpacing: "-0.8px",
+
+              [breakpoints.down(375)]: {
+                fontSize: 12,
+              },
             })}
           >
             #{ranking}
@@ -140,7 +184,7 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
         </MDBox>
 
         <MDBox
-          sx={({ palette, functions: { pxToRem } }) => ({
+          sx={({ palette, breakpoints, functions: { pxToRem } }) => ({
             width: pxToRem(48),
             height: pxToRem(48),
             backgroundColor: palette.white.main,
@@ -148,6 +192,11 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+
+            [breakpoints.down(375)]: {
+              width: pxToRem(40),
+              height: pxToRem(40),
+            },
           })}
         >
           <Icon component={DatabaseIcon} />
@@ -172,7 +221,10 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
             })}
           >
             <MDBox
-              sx={({ typography, functions: { pxToRem } }) => ({
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              sx={({ typography, breakpoints, functions: { pxToRem } }) => ({
                 flexGrow: 0,
                 flexBasis: 0,
                 width: pxToRem(24),
@@ -187,9 +239,14 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
                   color: "#172b4d",
                   fontFamily: typography.lexend.fontFamily,
                   fontSize: 16,
-                  fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "150%",
+                },
+
+                [breakpoints.down(375)]: {
+                  "& > span": {
+                    fontSize: 12,
+                  },
                 },
               })}
             >
@@ -207,10 +264,15 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
             >
               {user.avatar ? (
                 <MDBox
-                  sx={({ functions: { pxToRem } }) => ({
+                  sx={({ breakpoints, functions: { pxToRem } }) => ({
                     width: pxToRem(24),
                     height: pxToRem(24),
                     position: "relative",
+
+                    [breakpoints.down(375)]: {
+                      width: pxToRem(20),
+                      height: pxToRem(20),
+                    },
                   })}
                 >
                   <MDBox
@@ -239,7 +301,7 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
                 </MDBox>
               ) : user.avatarAlt ? (
                 <MDBox
-                  sx={({ typography, functions: { pxToRem } }) => ({
+                  sx={({ typography, breakpoints, functions: { pxToRem } }) => ({
                     width: pxToRem(24),
                     height: pxToRem(24),
                     borderRadius: "50%",
@@ -256,6 +318,13 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
                       fontWeight: 700,
                       lineHeight: "150%",
                     },
+
+                    [breakpoints.down(375)]: {
+                      width: pxToRem(20),
+                      height: pxToRem(20),
+
+                      "& > span": { fontSize: 8 },
+                    },
                   })}
                 >
                   <span>{user.avatarAlt}</span>
@@ -265,56 +334,23 @@ function Leaderboard({ header, tags, subtitle, ranking, users }) {
               )}
 
               <MDTypography
-                sx={({ typography }) => ({
+                sx={({ typography, breakpoints }) => ({
                   color: "#172b4d",
                   fontFamily: typography.lexend.fontFamily,
                   fontSize: 16,
-                  fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "150%",
+
+                  [breakpoints.down(375)]: {
+                    fontSize: 12,
+                  },
                 })}
               >
                 {user.name}
               </MDTypography>
             </MDBox>
 
-            {user.change > 0 ? (
-              <MDBox
-                sx={({ typography }) => ({
-                  flexGrow: 0,
-                  flexBasis: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  fontFamily: typography.openSan.fontFamily,
-                  fontSize: 16,
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "150%",
-                  color: "#2dce89",
-                })}
-              >
-                +{user.change} <IncreaseIcon />
-              </MDBox>
-            ) : user.change < 0 ? (
-              <MDBox
-                sx={({ typography }) => ({
-                  flexGrow: 0,
-                  flexBasis: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  fontFamily: typography.openSan.fontFamily,
-                  fontSize: 16,
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "150%",
-                  color: "#f56565",
-                })}
-              >
-                {user.change} <DecreaseIcon />
-              </MDBox>
-            ) : (
-              <></>
-            )}
+            {renderChange(user.change)}
           </MDBox>
         ))}
       </MDBox>

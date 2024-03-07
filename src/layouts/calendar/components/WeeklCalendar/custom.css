@@ -33,6 +33,21 @@
 #weekly .fc-timegrid-slot {
   height: 120px !important;
 }
+@media screen and (max-width: 1200px) {
+  #weekly .fc-timegrid-slot {
+    height: 80px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  #weekly .fc-timegrid-slot {
+    height: 60px !important;
+  }
+}
+@media screen and (max-width: 576px) {
+  #weekly .fc-timegrid-slot {
+    height: 40px !important;
+  }
+}
 #weekly .fc-timegrid-slot:last-child {
   border-bottom: 0.5px solid #e9ecef !important;
   border-right: 0.5px solid #e9ecef !important;
@@ -60,6 +75,21 @@
   background: #8898aa;
   border-radius: 4px;
 }
+
+@media screen and (max-width: 768px) {
+  #weekly tbody .fc-scroller {
+    margin-right: 0px;
+  }
+
+  #weekly tbody .fc-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  #weekly tbody .fc-scroller::-webkit-scrollbar-track {
+    display: none;
+  }
+}
+
 #weekly .fc-day-today {
   background-color: inherit !important;
 }
@@ -68,6 +98,21 @@
   border-radius: 8px;
   border: none;
   padding: 8px;
+}
+
+@media screen and (max-width: 1920px) {
+  #weekly .fc-v-event {
+    margin: 8px;
+    border-radius: 4px;
+    padding: 4px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #weekly .fc-v-event {
+    margin: 0px;
+    padding: 2px;
+  }
 }
 #weekly .fc-v-event .fc-event-time {
   display: none;
@@ -85,9 +130,14 @@
   line-height: 150%;
 }
 
+@media screen and (max-width: 768px) {
+  #weekly .fc-v-event .fc-event-title-container {
+    display: none;
+  }
+}
+
 .fc-scroller table {
   border-right: 1px solid !important;
-  /* border-left: 1px solid white !important; */
 }
 
 #weekly .fc-timegrid-slots table {
@@ -114,4 +164,12 @@
 
 #weekly .fc-scroller .fc-col-header {
   border-left-style: hidden !important;
+}
+
+#weekly .fc {
+  max-height: 80vh;
+}
+
+#weekly .fc-col-header-cell-cushion {
+  max-width: 100%;
 }

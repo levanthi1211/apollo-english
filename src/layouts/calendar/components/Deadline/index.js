@@ -26,7 +26,7 @@ function Deadline({ numOfDeadlines }) {
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
-        sx={{
+        sx={({ breakpoints }) => ({
           display: "flex",
           background: "#f56565",
           boxShadow: "0px 2px 6px 0px #00000040",
@@ -39,11 +39,15 @@ function Deadline({ numOfDeadlines }) {
           borderRadius: "4px",
           cursor: "pointer",
           position: "relative",
-        }}
+
+          [breakpoints.down("xl")]: {
+            transform: "scale(0.6)",
+          },
+        })}
       >
         <Icon component={() => <DeadlineIcon />} />
         <MDTypography
-          sx={{
+          sx={({ breakpoints }) => ({
             fontFamily: "Open Sans",
             fontSize: "14px",
             fontWeight: 400,
@@ -51,7 +55,7 @@ function Deadline({ numOfDeadlines }) {
             letterSpacing: "0em",
             textAlign: "center",
             color: "#fff",
-          }}
+          })}
         >
           {numOfDeadlines}
         </MDTypography>

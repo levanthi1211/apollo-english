@@ -3,66 +3,72 @@ import PropTypes from "prop-types";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
+// context
+import { useMaterialUIController } from "context";
+
+// styles
+import { cardStyles } from "./styles";
+
 function Card({ title, progress, logoBg, logo, diff, time }) {
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
   return (
     <MDBox
-      sx={({ palette, functions: { pxToRem } }) => ({
-        cursor: "pointer",
-        width: pxToRem(297),
-        height: pxToRem(118),
-        borderRadius: pxToRem(20),
-        background: palette.white.main,
-        boxShadow: "0px 5px 14px 0px rgba(0, 0, 0, 0.05)",
-        padding: "16px 24px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      })}
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      sx={(theme) => cardStyles(theme, { miniSidenav })}
     >
       <MDBox sx={{ display: "flex", justifyContent: "space-between" }}>
-        <MDBox
-          sx={({ functions: { pxToRem } }) => ({
-            display: "flex",
-            flexDirection: "column",
-            gap: pxToRem(8),
-          })}
-        >
+        <MDBox display="flex" flexDirection="column" gap={1}>
           <MDTypography
-            variant="p"
-            sx={({ typography }) => ({
+            fontWeight="bold"
+            fontStyle="normal"
+            letterSpacing="0.52px"
+            lineHeight="normal"
+            sx={({ typography, breakpoints }) => ({
+              fontSize: 14,
               color: "#8392ab",
               fontFamily: typography.lexend.fontFamily,
-              fontSize: 14,
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              letterSpacing: "0.52px",
+
+              [breakpoints.down(375)]: {
+                fontSize: 12,
+              },
             })}
           >
             {title}
           </MDTypography>
           <MDTypography
-            sx={({ typography }) => ({
+            fontWeight="bold"
+            fontStyle="normal"
+            lineHeight="100%"
+            sx={({ typography, breakpoints }) => ({
+              fontSize: 20,
               color: "#172b4d",
               fontFamily: typography.openSan.fontFamily,
-              fontSize: 20,
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "100%",
+
+              [breakpoints.down(375)]: {
+                fontSize: 16,
+              },
             })}
           >
             {progress}%
           </MDTypography>
         </MDBox>
         <MDBox
-          sx={({ functions: { pxToRem } }) => ({
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={({ breakpoints, functions: { pxToRem } }) => ({
             width: pxToRem(48),
             height: pxToRem(48),
             borderRadius: pxToRem(48),
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             background: logoBg,
+
+            [breakpoints.down(375)]: {
+              width: pxToRem(40),
+              height: pxToRem(40),
+            },
           })}
         >
           {logo({})}
@@ -76,27 +82,31 @@ function Card({ title, progress, logoBg, logo, diff, time }) {
         })}
       >
         <MDTypography
-          sx={({ typography }) => ({
+          sx={({ typography, breakpoints }) => ({
             color: diff > 0 ? "#2dce89" : "#e01e5a",
             fontFeatureSettings: `"clig" off, "liga" off`,
             fontFamily: typography.openSan.fontFamily,
             fontSize: 14,
-            fontStyle: "normal",
             fontWeight: 700,
-            lineHeight: "normal",
+
+            [breakpoints.down(375)]: {
+              fontSize: 12,
+            },
           })}
         >
           {diff}%
         </MDTypography>
         <MDTypography
-          sx={({ typography }) => ({
+          sx={({ typography, breakpoints }) => ({
             color: "#8392ab",
             fontFeatureSettings: `"clig" off, "liga" off`,
             fontFamily: typography.lexend.fontFamily,
             fontSize: 14,
-            fontStyle: "normal",
             fontWeight: 400,
-            lineHeight: "normal",
+
+            [breakpoints.down(375)]: {
+              fontSize: 12,
+            },
           })}
         >
           {time}

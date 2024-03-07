@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Icon from "@mui/material/Icon";
+import { Grid } from "@mui/material";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
@@ -32,6 +33,7 @@ import { useState, useRef } from "react";
 
 import WeeklyCalendar from "./components/WeeklCalendar";
 import MonthCalendar from "./components/MonthCalendar";
+import calendarStyles from "./styles/calendar";
 
 //Icons
 
@@ -43,21 +45,10 @@ function Calendar() {
   return (
     <DashboardLayout>
       <Header />
-      <MDBox
-        sx={({ functions: { pxToRem } }) => ({
-          width: pxToRem(1580),
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: pxToRem(18),
-          top: pxToRem(-45),
-          position: "relative",
-        })}
-      >
+      <MDBox sx={(theme) => calendarStyles(theme)}>
         <MDBox
           sx={({ functions: { pxToRem } }) => ({
             width: "100%",
-            height: pxToRem(200),
             borderRadius: pxToRem(16),
             background: "#fff",
             borderTop: "1px solid #e0e0e0",
@@ -67,201 +58,181 @@ function Calendar() {
           })}
         >
           <MDBox
-            sx={({ functions: { pxToRem } }) => ({
+            sx={() => ({
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              height: pxToRem(135),
               borderBottom: "1px solid #e0e0e0",
             })}
           >
-            <MDBox
-              sx={{
-                flexGrow: 1,
-                flexBasis: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                borderRight: "1px solid #e0e0e0",
-              }}
-            >
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 40,
-                  fontWeight: 900,
-                  lineHeight: pxToRem(50),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#EC4162",
-                })}
-              >
-                12
-              </MDTypography>
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 16,
-                  fontWeight: 700,
-                  lineHeight: pxToRem(26),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#4F4F4F",
-                })}
-              >
-                LESSONS THIS WEEK
-              </MDTypography>
-            </MDBox>
-            <MDBox
-              sx={{
-                flexGrow: 1,
-                flexBasis: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                borderRight: "1px solid #e0e0e0",
-              }}
-            >
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 40,
-                  fontWeight: 900,
-                  lineHeight: pxToRem(50),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#0ACF83",
-                })}
-              >
-                12
-              </MDTypography>
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 16,
-                  fontWeight: 700,
-                  lineHeight: pxToRem(26),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#4F4F4F",
-                })}
-              >
-                LESSONS THIS WEEK
-              </MDTypography>
-            </MDBox>
-            <MDBox
-              sx={{
-                flexGrow: 1,
-                flexBasis: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 40,
-                  fontWeight: 900,
-                  lineHeight: pxToRem(50),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#0ACF83",
-                })}
-              >
-                12
-              </MDTypography>
-              <MDTypography
-                sx={({ typography: { lexend }, functions: { pxToRem } }) => ({
-                  fontFamily: lexend.fontFamily,
-                  fontSize: 16,
-                  fontWeight: 700,
-                  lineHeight: pxToRem(26),
-                  letterSpacing: 0,
-                  textAlign: "center",
-                  color: "#4F4F4F",
-                })}
-              >
-                LESSONS THIS WEEK
-              </MDTypography>
-            </MDBox>
+            {[1, 2, 3].map((value) => {
+              return (
+                <MDBox
+                  key={value}
+                  sx={({ functions: { pxToRem } }) => ({
+                    flexGrow: 1,
+                    flexBasis: "0",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    padding: `${pxToRem(27)} 0`,
+                    "&:not(:last-child)": {
+                      borderRight: "1px solid #e0e0e0",
+                    },
+                  })}
+                >
+                  <MDTypography
+                    sx={({ breakpoints, typography: { lexend }, functions: { pxToRem } }) => ({
+                      fontFamily: lexend.fontFamily,
+                      fontSize: 40,
+                      fontWeight: 900,
+                      lineHeight: pxToRem(50),
+                      textAlign: "center",
+                      color: "#EC4162",
+
+                      [breakpoints.down("xl")]: {
+                        fontSize: 34,
+                        lineHeight: pxToRem(42.5),
+                      },
+
+                      [breakpoints.down("lg")]: {
+                        fontSize: 28,
+                        lineHeight: pxToRem(35),
+                      },
+
+                      [breakpoints.down("md")]: {
+                        fontSize: 22,
+                        lineHeight: pxToRem(27.5),
+                      },
+                    })}
+                  >
+                    12
+                  </MDTypography>
+                  <MDTypography
+                    sx={({ breakpoints, typography: { lexend }, functions: { pxToRem } }) => ({
+                      fontFamily: lexend.fontFamily,
+                      fontSize: 16,
+                      fontWeight: 700,
+                      lineHeight: pxToRem(26),
+                      textAlign: "center",
+                      color: "#4F4F4F",
+
+                      [breakpoints.down("xl")]: {
+                        fontSize: 14,
+                        lineHeight: pxToRem(23),
+                      },
+
+                      [breakpoints.down("lg")]: {
+                        fontSize: 12,
+                        lineHeight: pxToRem(20),
+                      },
+
+                      [breakpoints.down("md")]: {
+                        fontSize: 10,
+                        lineHeight: pxToRem(17),
+                      },
+                    })}
+                  >
+                    LESSONS THIS WEEK
+                  </MDTypography>
+                </MDBox>
+              );
+            })}
           </MDBox>
           <MDBox
             sx={({ functions: { pxToRem } }) => ({
-              height: pxToRem(65),
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              padding: `${pxToRem(14)}`,
             })}
           >
-            <MDBox sx={({ functions: { pxToRem } }) => ({ display: "flex", gap: pxToRem(25) })}>
+            <Grid container columnSpacing="25px" justifyContent="center">
               {tabs.map((tab, index) => {
                 const TabIcon = tab.icon;
                 return (
-                  <MDBox
-                    key={index}
-                    sx={({ functions: { pxToRem } }) => ({
-                      cursor: "pointer",
-                      borderRadius: "8px",
-                      height: pxToRem(35),
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: pxToRem(4),
-                      width: tab.width,
-
-                      ...(tabIndex === index ? { background: "#3b6ef8" } : {}),
-                    })}
-                    onClick={() => setTabIndex(index)}
-                  >
+                  <Grid item xs={6} sm="auto" key={index}>
                     <MDBox
                       sx={({ functions: { pxToRem } }) => ({
-                        width: pxToRem(18),
-                        height: pxToRem(18),
+                        cursor: "pointer",
+                        borderRadius: "8px",
+                        height: pxToRem(35),
+                        padding: `0 ${pxToRem(18)}`,
                         display: "flex",
-                        justifyContent: "center",
                         alignItems: "center",
-                      })}
-                    >
-                      <Icon
-                        component={() => <TabIcon fill={tabIndex === index ? "#fff" : "#4f4f4f"} />}
-                      />
-                    </MDBox>
+                        justifyContent: "center",
+                        gap: pxToRem(4),
 
-                    <MDTypography
-                      variant="span"
-                      sx={({ typography, functions: { pxToRem } }) => ({
-                        fontFamily: typography.lexend.fontFamily,
-                        fontSize: "15px",
-                        fontWeight: 500,
-                        lineHeight: pxToRem(23),
-                        letterSpacing: "0em",
-                        textAlign: "center",
-                        color: tabIndex === index ? "#fff" : "#828282",
+                        ...(tabIndex === index ? { background: "#3b6ef8" } : {}),
                       })}
+                      onClick={() => setTabIndex(index)}
                     >
-                      {tab.title}
-                    </MDTypography>
-                  </MDBox>
+                      <MDBox
+                        sx={({ functions: { pxToRem } }) => ({
+                          width: pxToRem(18),
+                          height: pxToRem(18),
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        })}
+                      >
+                        <Icon
+                          component={() => (
+                            <TabIcon fill={tabIndex === index ? "#fff" : "#4f4f4f"} />
+                          )}
+                        />
+                      </MDBox>
+
+                      <MDTypography
+                        variant="span"
+                        sx={({ typography, breakpoints, functions: { pxToRem } }) => ({
+                          fontFamily: typography.lexend.fontFamily,
+                          fontSize: 15,
+                          fontWeight: 500,
+                          lineHeight: pxToRem(23),
+                          letterSpacing: "0em",
+                          textAlign: "center",
+                          color: tabIndex === index ? "#fff" : "#828282",
+
+                          [breakpoints.down("md")]: {
+                            display: "none",
+                          },
+                        })}
+                      >
+                        {tab.title}
+                      </MDTypography>
+                    </MDBox>
+                  </Grid>
                 );
               })}
-            </MDBox>
+            </Grid>
           </MDBox>
         </MDBox>
 
         <MDBox
           sx={({ functions: { pxToRem } }) => ({
-            display: "flex",
             height: pxToRem(814),
             width: "100%",
-            gap: pxToRem(22),
           })}
         >
-          <WeeklyCalendar />
-          <MonthCalendar />
+          <Grid container columnSpacing="22px" rowGap="22px">
+            <Grid item xs={12} xl>
+              <WeeklyCalendar />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              xl="auto"
+              sx={({ breakpoints }) => ({
+                [breakpoints.down("xl")]: {
+                  marginBottom: "22px",
+                },
+              })}
+            >
+              <MonthCalendar />
+            </Grid>
+          </Grid>
         </MDBox>
       </MDBox>
     </DashboardLayout>

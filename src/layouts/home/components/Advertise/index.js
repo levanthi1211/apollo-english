@@ -22,18 +22,24 @@ function Advertise() {
   };
   return (
     <MDBox
-      sx={({ functions: { pxToRem } }) => ({
-        width: pxToRem(610),
-        height: pxToRem(400),
+      width="100%"
+      height="100%"
+      sx={({ breakpoints, functions: { pxToRem } }) => ({
+        minHeight: pxToRem(400),
         borderRadius: pxToRem(20),
         position: "relative",
         overflow: "hidden",
+
+        [breakpoints.down("lg")]: {
+          height: "60vw",
+          minHeight: "unset",
+        },
       })}
     >
       <Slider ref={sliderRef} {...settings}>
         {[1, 2, 3, 4].map((index) => {
           return (
-            <MDBox key={index} sx={{ height: "100%", width: "100%", display: "block" }}>
+            <MDBox key={index} width="100%" height="100%">
               <MDBox
                 sx={{
                   height: "100%",
@@ -47,6 +53,7 @@ function Advertise() {
                 <MDBox
                   sx={({ palette, functions: { pxToRem } }) => ({
                     width: pxToRem(340),
+                    maxWidth: `calc(100% - ${pxToRem(36)})`,
                     height: `${pxToRem(44)} !important`,
                     padding: `${pxToRem(13)} ${pxToRem(11)}`,
                     cursor: "pointer",
@@ -54,7 +61,7 @@ function Advertise() {
                     borderRadius: pxToRem(8),
                     position: "absolute",
                     top: pxToRem(16),
-                    left: pxToRem(8),
+                    left: pxToRem(18),
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",

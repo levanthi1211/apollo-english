@@ -54,6 +54,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
       borderRadius: 0,
       boxShadow: lg,
       overflowY: "auto",
+      maxWidth: "100%",
       ...(openNotification ? drawerOpenStyles() : drawerCloseStyles()),
     },
   };
