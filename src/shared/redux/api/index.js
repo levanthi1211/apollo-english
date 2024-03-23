@@ -28,7 +28,6 @@ const axiosBaseQuery =
         headers: {
           ...getAuthHeader(),
           ...headers,
-          "x-cors-api-key": "temp_8897abaadeee6e9ec925d643e4f941fb",
         },
       });
       return result;

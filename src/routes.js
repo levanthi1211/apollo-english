@@ -53,6 +53,7 @@ import MenuCalendarIcon from "components/icons/MenuCalendarIcon";
 import MenuCalendarActiveIcon from "components/icons/MenuCalendarActiveIcon";
 import MenuSelf from "components/icons/MenuSelf";
 import MenuSelfActive from "components/icons/MenuSelfActive";
+import ResetPassword from "pages/reset-password";
 
 const routes = [
   { type: "divider", key: "divider-0" },
@@ -156,6 +157,15 @@ const routes = [
     hiddenInSidenav: true,
     isPrivate: true,
     redirectPath: "/sign-in",
+  },
+  {
+    type: "collapse",
+    name: "Reset Password",
+    key: "reset-password",
+    noCollapse: true,
+    component: <ResetPassword />,
+    route: "/reset-password",
+    hiddenInSidenav: true,
   },
 ];
 
