@@ -42,6 +42,7 @@ function PageLayout({ background, children }) {
       minHeight="100vh"
       bgColor={background}
       sx={{ overflowX: "hidden" }}
+      position="relative"
     >
       {children}
     </MDBox>

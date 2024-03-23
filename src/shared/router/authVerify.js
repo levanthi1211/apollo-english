@@ -35,13 +35,16 @@ const AuthVerify = () => {
           const refreshResult = await getTokens({
             refreshToken,
           });
-
-          dispatch(
-            setTokens({
-              accessToken: refreshResult.data.accessToken,
-              refreshToken: refreshResult.data.refreshToken,
-            })
-          );
+          if (refreshResult.error) {
+            dispatch(logOut());
+          } else {
+            dispatch(
+              setTokens({
+                accessToken: refreshResult.data.accessToken,
+                refreshToken: refreshResult.data.refreshToken,
+              })
+            );
+          }
         }
       } else {
         dispatch(logOut());

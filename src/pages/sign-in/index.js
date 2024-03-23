@@ -100,7 +100,18 @@ function SignIn() {
   }, [isLoading]);
 
   const handleSignWithGoogle = () => {
-    window.location.href = "https://apollo2be.schoolcento.com/apollo2/oauth2/login";
+    let timer;
+    const googleLoginUrl = "https://apollo2be.schoolcento.com/apollo2/oauth2/login";
+    const newWindow = window.open(googleLoginUrl, "_blank", "width=500,height=500");
+
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          console.log("Yay we're authenticated");
+          if (timer) clearInterval(timer);
+        }
+      }, 500);
+    }
   };
 
   return (

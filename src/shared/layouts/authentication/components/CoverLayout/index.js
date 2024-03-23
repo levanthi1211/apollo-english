@@ -31,7 +31,7 @@ import Footer from "shared/layouts/authentication/components/Footer";
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
-    <PageLayout>
+    <PageLayout sx={{ position: "relative" }}>
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}
