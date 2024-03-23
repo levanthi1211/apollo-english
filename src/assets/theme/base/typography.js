@@ -205,6 +205,8 @@ const typography = {
   lato: {
     fontFamily: ["Lato", "sans-serif"].join(","),
   },
+  lexendFontFamily: ["Lexend", "sans-serif"].join(","),
+  openSansFontFamily: ["Open Sans", "sans-serif"].join(","),
 };
 
 export default typography;

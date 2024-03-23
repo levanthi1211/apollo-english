@@ -41,7 +41,6 @@ function PageLayout({ background, children }) {
       height="100%"
       minHeight="100vh"
       bgColor={background}
-      position="relative"
       sx={{ overflowX: "hidden" }}
     >
       {children}

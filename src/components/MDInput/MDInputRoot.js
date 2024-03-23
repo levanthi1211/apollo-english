@@ -18,7 +18,7 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 export default styled(TextField)(({ theme, ownerState }) => {
-  const { palette, functions } = theme;
+  const { palette, functions, typography } = theme;
   const { error, success, disabled } = ownerState;
 
   const { grey, transparent, error: colorError, success: colorSuccess } = palette;
@@ -58,7 +58,7 @@ export default styled(TextField)(({ theme, ownerState }) => {
     },
 
     "& .MuiInputLabel-root.Mui-focused": {
-      color: colorSuccess.main,
+      color: `${colorSuccess.main} !important`,
     },
   });
 
@@ -67,5 +67,30 @@ export default styled(TextField)(({ theme, ownerState }) => {
     pointerEvents: disabled ? "none" : "auto",
     ...(error && errorStyles()),
     ...(success && successStyles()),
+
+    "& .MuiInputBase-root, & .MuiInputBase-root .MuiInputBase-input": {
+      height: "100%",
+      lineHeight: "100%",
+    },
+
+    "& .MuiInputBase-root .MuiInputBase-input": {
+      paddingLeft: pxToRem(20),
+    },
+
+    "& input::placeholder": {
+      fontFamily: typography.lexendFontFamily,
+    },
+
+    "& label": {
+      fontSize: 16,
+      lineHeight: 1,
+      fontFamily: typography.lexendFontFamily,
+      color: "#A0AEC0",
+      left: 6,
+    },
+
+    "& legend": {
+      marginLeft: 6,
+    },
   };
 });

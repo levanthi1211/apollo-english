@@ -24,28 +24,14 @@ import MDBox from "components/MDBox";
 // import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 PRO React examples
-import DefaultNavbar from "shared/examples/Navbars/DefaultNavbar";
 import PageLayout from "shared/examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
-
-// Material Dashboard 2 PRO React page layout routes
-import pageRoutes from "page.routes";
+import Footer from "shared/layouts/authentication/components/Footer";
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar
-        routes={pageRoutes}
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/material-dashboard-pro-react",
-          label: "buy now",
-        }}
-        transparent
-        light
-      />
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}
@@ -66,7 +52,13 @@ function CoverLayout({ coverHeight, image, children }) {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <MDBox mt={{ xs: -20, lg: -18 }} px={1} width="calc(100% - 2rem)" mx="auto">
+      <MDBox
+        mt={{ xs: -20, lg: -18 }}
+        px={1}
+        pb={{ xs: 18, md: 20 }}
+        width="calc(100% - 2rem)"
+        mx="auto"
+      >
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             {children}

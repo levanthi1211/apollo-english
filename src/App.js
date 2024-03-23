@@ -45,6 +45,7 @@ import createCache from "@emotion/cache";
 
 // Material Dashboard 2 PRO React routes
 import routes from "routes";
+import { AuthWrapper } from "shared/router/authWrapper";
 
 // Material Dashboard 2 PRO React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -52,7 +53,16 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
-import Login from "layouts/login";
+import Login from "pages/sign-in";
+import ChangePassword from "pages/change-password";
+import { useSelector } from "react-redux";
+import authSlice from "shared/redux/slices/authSlice";
+import { selectAuth } from "shared/redux/slices/authSlice";
+import AuthVerify from "shared/router/authVerify";
+import { useDispatch } from "react-redux";
+import { Backdrop, CircularProgress } from "@mui/material";
+import { selectTheme } from "shared/redux/slices/themeSlice";
+import { setGlobalLoading } from "shared/redux/slices/themeSlice";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -69,6 +79,12 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const auth = useSelector(selectAuth);
+  const reduxTheme = useSelector(selectTheme);
+  const { accessToken, refreshToken } = auth;
+  const { globalLoading } = reduxTheme;
+
+  const isAuthenticated = accessToken && refreshToken;
 
   // Cache for the rtl
   useMemo(() => {
@@ -82,10 +98,10 @@ export default function App() {
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
-    if (miniSidenav && !onMouseEnter) {
-      setMiniSidenav(dispatch, false);
-      setOnMouseEnter(true);
-    }
+    // if (miniSidenav && !onMouseEnter) {
+    //   setMiniSidenav(dispatch, false);
+    //   setOnMouseEnter(true);
+    // }
   };
 
   // Close sidenav when mouse leave mini sidenav
@@ -117,7 +133,22 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return (
+          <Route
+            exact
+            path={route.route}
+            element={
+              route.isPrivate ? (
+                <AuthWrapper isAllowed={isAuthenticated} redirectPath={route.redirectPath}>
+                  {route.component}
+                </AuthWrapper>
+              ) : (
+                route.component
+              )
+            }
+            key={route.key}
+          />
+        );
       }
 
       return null;
@@ -147,38 +178,13 @@ export default function App() {
     </MDBox>
   );
 
-  return direction === "rtl" ? (
-    <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Material Dashboard PRO"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {configsButton}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboards/analytics" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
-  ) : (
+  return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
+      {isAuthenticated && layout === "dashboard" && (
         <>
           <Sidenav
-            avatar="https://s3-alpha-sig.figma.com/img/364f/a00c/2982f2eb08c14e03a610657e49749295?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CJwsab9VD3GsKiYOOQsr4KCK9-ZHbgnrjInrwHDiBVdyqE9mACwhOALrq27-sIH-gTFm5FSjgsfDq6yJD7aUND-UCf0BNbMoA0YTroTZlc~bu06kLHYh3i1MIFU-1k6vUTzFv3Nh4~OkhfGxaRL5rfez~9womCJKps9AXedS~DniFHaroeBmh1m374cuIrtVhsL6GfS8l-iUFAPl3wTAxHVH42FYJSlmI~DSZ9qkiNSmouHjDgweup2JcySkP6AS83~0uYYGmt2kMGhYsbEmgulWaAfPuWui1~dWmg2vFk0f6~GaYO2ECTlldGmZTr~V~qDmKCgqOjBZhU-6uosSEQ__"
+            avatar="https://s3-alpha-sig.figma.com/img/364f/a00c/2982f2eb08c14e03a610657e49749295?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Vdyoqo46yRhPft6zG3Cq7UZfEM9v8S1loLJutO1nh6TYilDZ1kO-cM3aiRcGx~Achw6tyMUmwVwn-NQWcr9oPtNVpfPf6jGHjz18zMrRNkS0RwiN-oVg~K1nAsdNH6jU2EBqPrCLqgnAx13tArO99sz1WzTL0LFU2kHm731~losCMyJ6YbzqQ9Jlo77bHOfD~jnZTSnrgp7AbkMLzuMdC518RilgRNhXpVPmwyGDOO1gLPdP8PyMWxTZrj63mM8nFTG4jRFf7A~JcaP7Mr9AIOa6Cqzn0Qs3aeosVmsHJ8rYb7DAeYZ5kk~raUm4V5Gh2Hgsbpp2xQYwGcYSvVTqPw__"
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brandName="Material Dashboard PRO"
@@ -190,12 +196,24 @@ export default function App() {
           {configsButton}
         </>
       )}
-      {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to="/dashboards/analytics" />} />
+        <Route path="*" element={<Navigate to="/sign-in" />} />
       </Routes>
+      <AuthVerify />
+      <Backdrop
+        sx={{ color: "#fff", zIndex: 9999 }}
+        open={globalLoading}
+        onClick={() => {
+          dispatch(
+            setGlobalLoading({
+              isLoading: false,
+            })
+          );
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </ThemeProvider>
   );
 }

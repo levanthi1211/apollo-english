@@ -1,0 +1,23 @@
+#table-content th,
+#table-content td {
+  text-align: center;
+  vertical-align: middle;
+}
+#table-content thead,
+#table-content tbody tr {
+  height: 66px;
+}
+
+#table-content thead {
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  background: white !important;
+  z-index: 99;
+}
+
+#table-content tbody tr {
+  font-weight: 500;
+  border-top: 1px solid #f5f6f6;
+  border-bottom: 1px solid #f5f6f6;
+}

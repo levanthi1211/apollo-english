@@ -27,37 +27,37 @@ import MDBox from "components/MDBox";
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController, setLayout } from "context";
 
-function PageLayout({ background, children }) {
-  const [, dispatch] = useMaterialUIController();
+function DashboardLayout({ children }) {
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav } = controller;
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setLayout(dispatch, "page");
+    setLayout(dispatch, "dashboard");
   }, [pathname]);
 
   return (
     <MDBox
-      width="100vw"
-      height="100%"
-      minHeight="100vh"
-      bgColor={background}
-      position="relative"
-      sx={{ overflowX: "hidden" }}
+      sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
+        position: "relative",
+
+        [breakpoints.up("xl")]: {
+          marginLeft: miniSidenav ? pxToRem(96) : pxToRem(200),
+          transition: transitions.create(["margin-left", "margin-right"], {
+            easing: transitions.easing.easeInOut,
+            duration: transitions.duration.standard,
+          }),
+        },
+      })}
     >
       {children}
     </MDBox>
   );
 }
 
-// Setting default values for the props for PageLayout
-PageLayout.defaultProps = {
-  background: "default",
-};
-
-// Typechecking props for the PageLayout
-PageLayout.propTypes = {
-  background: PropTypes.oneOf(["white", "light", "default"]),
+// Typechecking props for the DashboardLayout
+DashboardLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default PageLayout;
+export default DashboardLayout;

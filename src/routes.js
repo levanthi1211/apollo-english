@@ -35,8 +35,10 @@ Coded by www.creative-tim.com
   10. The `component` key is used to store the component of its route.
 */
 
-import Home from "layouts/home";
+import Home from "pages/home";
 import Calendar from "layouts/calendar";
+import SignIn from "pages/sign-in";
+import ChangePassword from "pages/change-password";
 
 /* Custom Icons */
 import MenuHomeIcon from "components/icons/MenuHomeIcon";
@@ -63,6 +65,8 @@ const routes = [
     noCollapse: true,
     component: <Home />,
     route: "/",
+    isPrivate: true,
+    redirectPath: "/sign-in",
   },
   {
     type: "collapse",
@@ -130,6 +134,28 @@ const routes = [
     noCollapse: true,
     component: <Calendar />,
     route: "/calendar",
+    isPrivate: true,
+    redirectPath: "/sign-in?redirectTo=calendar",
+  },
+  {
+    type: "collapse",
+    name: "Sign In",
+    key: "sign-in",
+    noCollapse: true,
+    component: <SignIn />,
+    route: "/sign-in",
+    hiddenInSidenav: true,
+  },
+  {
+    type: "collapse",
+    name: "Change Password",
+    key: "change-password",
+    noCollapse: true,
+    component: <ChangePassword />,
+    route: "/change-password",
+    hiddenInSidenav: true,
+    isPrivate: true,
+    redirectPath: "/sign-in",
   },
 ];
 

@@ -21,17 +21,27 @@ import App from "App";
 // Material Dashboard 2 PRO React Context Provider
 import { MaterialUIControllerProvider } from "context";
 
+// Redux Provider
+import { Providers } from "shared/redux/provider";
+
+// Toasts
+import { ToastContainer } from "react-toastify";
+
 // CSS Libraries
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <MaterialUIControllerProvider>
-      <App />
-    </MaterialUIControllerProvider>
-  </BrowserRouter>
+  <Providers>
+    <BrowserRouter>
+      <MaterialUIControllerProvider>
+        <App />
+        <ToastContainer />
+      </MaterialUIControllerProvider>
+    </BrowserRouter>
+  </Providers>
 );

@@ -5,8 +5,6 @@ import { useEffect } from "react";
 import Icon from "@mui/material/Icon";
 import Grid from "@mui/material/Grid";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -42,16 +40,13 @@ import homeStyles from "./styles/home";
 
 // Redux
 import { useGetPerformanceQuery } from "shared/redux/endpoints/teacher";
+import { Skeleton } from "@mui/material";
 
 function Home() {
   const [controller] = useMaterialUIController();
   const { miniSidenav } = controller;
 
   const { data, isLoading } = useGetPerformanceQuery();
-
-  useEffect(() => {
-    if (!isLoading && data) console.log(data);
-  }, [isLoading, data]);
 
   return (
     <DashboardLayout>
@@ -78,14 +73,47 @@ function Home() {
             },
           })}
         >
-          <Grid item xs={12} md={6} xxl={4} xxxl={2.4}>
-            <SpecialCard />
-          </Grid>
-          {cards.map((card, index) => (
-            <Grid key={index} item xs={12} md={6} xxl={4} xxxl={2.4}>
-              <Card {...card} />
-            </Grid>
-          ))}
+          {!isLoading ? (
+            <>
+              {" "}
+              <Grid item xs={12} md={6} xxl={4} xxxl={2.4}>
+                <SpecialCard progress={0} diff={0} />
+              </Grid>
+              {cards.map((card, index) => {
+                let progress = 0,
+                  diff = 0;
+                switch (index) {
+                  case 0:
+                    progress = data?.renewalRate?.currentMonthRate || 0;
+                    diff = data?.renewalRate?.lastMonthRate || 0;
+                    break;
+                  case 1:
+                    progress = data?.weLearnCourseProgress?.currentWeekCompleteRate || 0;
+                    diff = data?.weLearnCourseProgress?.lastWeekCompleteRate;
+                    break;
+                  case 2:
+                    progress = data?.teachingHour?.currentMonthTeachingHours || 0;
+                    diff = data?.teachingHour?.lastMonthTeachingHours || 0;
+                    break;
+                  default:
+                    break;
+                }
+                return (
+                  <Grid key={index} item xs={12} md={6} xxl={4} xxxl={2.4}>
+                    <Card {...card} progress={progress} diff={diff} />
+                  </Grid>
+                );
+              })}
+            </>
+          ) : (
+            <>
+              {Array.from(new Array(5)).map((item) => (
+                <Grid key={item} item xs={12} md={6} xxl={4} xxxl={2.4}>
+                  <Skeleton variant="rectangular" height={120} />
+                </Grid>
+              ))}
+            </>
+          )}
         </Grid>
 
         <Grid

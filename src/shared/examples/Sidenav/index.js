@@ -181,9 +181,8 @@ function Sidenav({ color, brand, brandName, routes, avatar, ...rest }) {
     });
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes
-    .filter((route) => !route.hiddenInSidenav)
-    .map(({ type, name, icon, iconActive, title, collapse, noCollapse, key, href, route }) => {
+  const renderRoutes = routes.map(
+    ({ type, name, icon, iconActive, title, collapse, noCollapse, key, href, route }) => {
       let returnValue;
 
       if (type === "collapse") {
@@ -265,7 +264,8 @@ function Sidenav({ color, brand, brandName, routes, avatar, ...rest }) {
       }
 
       return returnValue;
-    });
+    }
+  );
 
   const navigate = useNavigate();
   const reduxDispatch = useDispatch();

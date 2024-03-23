@@ -20,7 +20,6 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("a");
     setLayout(dispatch, "page");
   }, [pathname]);
 
